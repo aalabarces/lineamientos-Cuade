@@ -1,6 +1,6 @@
 # Lineamientos para apps de la empresa — guía para Claude Code
 
-Este archivo va en la raíz de cada proyecto nuevo. Leelo entero antes de escribir una línea de código y cumplilo durante todo el trabajo.
+Este archivo va en la raíz de cada proyecto nuevo, junto con `docs/REVISION.md` (la checklist con la que vas a revisar tu propio trabajo al final). Leelo entero antes de escribir una línea de código y cumplilo durante todo el trabajo.
 
 ## Quién es quién
 - **La persona que te usa no es programadora.** Vos programás todo: backend, front, migraciones, tests y documentación.
@@ -136,6 +136,7 @@ requirements.txt   dependencias con versión fija
 README.md          ficha de la app (ver Paso 0), responsable, cómo correrla
 docs/deploy.md     pasos exactos para el revisor
 docs/datos.md      qué datos guarda y quién los ve (si aplica)
+docs/REVISION.md   checklist de revisión (viene con el proyecto, no se edita)
 deploy/            archivos de servidor (gunicorn, systemd, nginx) si hacen falta
 CLAUDE.md          este archivo
 ```
@@ -150,13 +151,14 @@ CLAUDE.md          este archivo
 - Diseño que funcione en celular. Textos en español rioplatense. Contraste suficiente y botones con texto, no solo íconos.
 
 ## Cuándo está "listo"
-**No digas que la app está lista hasta haber corrido todo esto y mostrarle el resultado a la persona en palabras simples:**
-1. `python manage.py test` en verde.
-2. `python manage.py check --deploy` sin advertencias.
-3. `pip-audit` sin vulnerabilidades pendientes.
-4. `bandit -r .` (excluyendo `.venv`) sin problemas altos sin explicar.
-5. Búsqueda de claves o secretos escritos en el código y en el historial de git: ninguno.
-6. Revisión de permisos: listar las vistas y confirmar que cada una tiene control de acceso, o que es pública a propósito.
+**No digas que la app está lista hasta haber hecho la autorrevisión con `docs/REVISION.md`.** Es la misma checklist que va a usar el revisor técnico, así que lo que vos dejes en verde, él lo va a encontrar en verde.
+1. Recorré el archivo **punto por punto, sin saltear filas**, y corré los comandos que indica. No lo edites.
+2. Corregí todo lo rojo y lo amarillo que dependa de vos, y volvé a correr los puntos afectados.
+3. Los puntos marcados **[solo revisor]** no los podés verificar (dependen del servidor): dejalos anotados en el resumen para él.
+4. Mostrale a la persona el resultado en palabras simples: por cada sección, si quedó bien, qué corregiste, y qué queda pendiente y por qué.
+5. Si queda un rojo que no podés resolver, **no digas que está lista**: explicá qué falta y qué decisión hace falta.
+
+Si `docs/REVISION.md` no está en el proyecto, avisale a la persona que le pida el archivo al revisor. Mientras tanto corré como mínimo: `python manage.py test`, `python manage.py check --deploy`, `pip-audit`, `bandit -r .` (sin `.venv`), una búsqueda de claves en el código y en el historial de git, y la revisión de permisos de cada vista.
 
 Después entregá:
 - **`docs/deploy.md`** con: comandos exactos, versión de Python, variables nuevas del `.env` (nombres, sin valores), migraciones, tareas en segundo plano, servicios a reiniciar, subdominio, cómo hacer backup y restaurar la base, y **cómo volver atrás si el deploy sale mal**.

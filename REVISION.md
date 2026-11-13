@@ -1,4 +1,6 @@
-# Checklist de revisión de apps (para el revisor técnico)
+# Checklist de revisión de apps
+
+La usan dos veces: **Claude la recorre al terminar la app** (autorrevisión, antes de decir "lista") y **el revisor técnico la repite** antes de subirla al servidor. Los puntos marcados **[solo revisor]** dependen del servidor y los verifica solo el revisor. La sección "Resultado" del final es para el revisor.
 
 Pensada para una revisión de 20–30 minutos por app. Cada punto dice qué mirar, cómo verificarlo y cuándo es **rojo** (se devuelve) o **amarillo** (se aprueba anotando qué corregir). Los comandos asumen que estás en la raíz del proyecto, con el entorno virtual activado.
 
@@ -93,7 +95,7 @@ Pensada para una revisión de 20–30 minutos por app. Cada punto dice qué mira
 | `docs/deploy.md` | Leerlo como si lo ejecutaras | Faltan comandos, variables, migraciones o servicios |
 | Variables nuevas | Comparar `.env.example` con `settings.py` | Hay una variable usada y no documentada |
 | Vuelta atrás y backup | Sección en `deploy.md` | No está |
-| Aislamiento | Usuario de sistema, base y subdominio propios | Comparte usuario o base con otra app |
+| Aislamiento **[solo revisor]** | Usuario de sistema, base y subdominio propios | Comparte usuario o base con otra app |
 
 ## Resultado
 - **Aprobada:** todo verde. Subir.
